@@ -1,4 +1,4 @@
-import App from './App.tsx'
+import App from '../App/App.tsx'
 
 export default function Root() {
     return (
