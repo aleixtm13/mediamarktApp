@@ -2,14 +2,13 @@ namespace Domain.Products;
 
 public class ProductFamily 
 {
-    public ProductFamily(ProductFamilyId productFamilyId, string name, ICollection<Product> products)
+    public ProductFamily(ProductFamilyId id, string name)
     {
-        ProductFamilyId = productFamilyId;
+        Id = id;
         Name = name;
-        Products = products;
     }
 
-    public ProductFamilyId ProductFamilyId {get; private set;}
+    public ProductFamilyId Id {get; private set;}
     public string Name {get; private set;}
     public ICollection<Product> Products {get; private set;}
 }
