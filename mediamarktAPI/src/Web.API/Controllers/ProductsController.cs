@@ -1,4 +1,5 @@
 using Application.Products.Create;
+using Application.Products.Get;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +23,16 @@ public class ProductsController : APIController
             product => Ok(),
             errors => Problem(errors)
         );
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Get(string? searchText)
+    {
+        var productsResult = await _mediator.Send(new GetProductsQuery(searchText));
+        return productsResult.Match(
+            products => Ok(products), 
+            errors => Problem(errors)
+            );
     }
     
 }

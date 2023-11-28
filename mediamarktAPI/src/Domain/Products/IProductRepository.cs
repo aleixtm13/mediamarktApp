@@ -4,4 +4,6 @@ public interface IProductRepository
 {
     // Task<List<Product>> GetAll();
     Task Add(Product product);
+
+    Task<List<Product>> GetProducts(string searchText);
 }
