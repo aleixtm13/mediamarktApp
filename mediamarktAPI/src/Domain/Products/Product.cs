@@ -5,14 +5,13 @@ namespace Domain.Products;
 public sealed class Product : AggregateRoot 
 {
 
-    public Product(ProductId productId, string name, string description, double price, ProductFamilyId productFamilyId, ProductFamily productFamily)
+    public Product(ProductId productId, string name, string description, double price, ProductFamilyId productFamilyId)
     {
         ProductId = productId;
         Name = name;
         Description = description;
         Price = price;
         ProductFamilyId = productFamilyId;
-        ProductFamily = productFamily;
     }
 
     public ProductId ProductId {get; private set;}
