@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Application.Data;
 using Domain.Primitives;
-using Domain.Planet;
 using Infrastructure.Persistance.Repositories;
 using Domain.Products;
 using Infrastructure.Repositories;
@@ -25,7 +24,6 @@ public static class DependencyInjection
         services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContext>());
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
 
-        services.AddScoped<IPlanetRepository, PlanetRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<IProductFamilyRepository, ProductFamilyRepository>();
         return services;

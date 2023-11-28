@@ -1,6 +1,4 @@
-
 using Application.Data;
-using Domain.Planet;
 using Domain.Primitives;
 using Domain.Products;
 using MediatR;
@@ -11,7 +9,6 @@ namespace Infrastructure.Persistance;
 public class ApplicationDbContext : DbContext, IApplicationDbContext, IUnitOfWork
 {
     private readonly IPublisher _publisher;
-    public DbSet<Planet> Planets { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<ProductFamily> ProductFamily { get; set; }
 
