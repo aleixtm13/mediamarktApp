@@ -9,6 +9,7 @@ public interface IApplicationDbContext
     DbSet<Planet> Planets { get; set; }
 
     DbSet<Product> Products {get; set;}
+    DbSet<ProductFamily> ProductFamily { get; set;}
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

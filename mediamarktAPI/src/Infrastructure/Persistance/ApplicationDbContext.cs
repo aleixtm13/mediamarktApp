@@ -13,6 +13,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext, IUnitOfWor
     private readonly IPublisher _publisher;
     public DbSet<Planet> Planets { get; set; }
     public DbSet<Product> Products { get; set; }
+    public DbSet<ProductFamily> ProductFamily { get; set; }
 
     public ApplicationDbContext(DbContextOptions options, IPublisher publisher) : base(options)
     {

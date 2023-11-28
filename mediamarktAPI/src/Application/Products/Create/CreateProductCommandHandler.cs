@@ -1,3 +1,4 @@
+using Domain.DomainErrors;
 using Domain.Primitives;
 using Domain.Products;
 using ErrorOr;
@@ -8,17 +9,23 @@ namespace Application.Products.Create;
 public sealed class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, ErrorOr<Unit>>
 {
     private readonly IProductRepository _productRepository;
+    private readonly IProductFamilyRepository _productFamilyRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public CreateProductCommandHandler(IProductRepository productRepository, IUnitOfWork unitOfWork)
+    public CreateProductCommandHandler(IProductRepository productRepository, IProductFamilyRepository productFamilyRepository, IUnitOfWork unitOfWork)
     {
         _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
+        _productFamilyRepository = productFamilyRepository ?? throw new ArgumentNullException(nameof(productFamilyRepository));
         _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
     }
 
     public async Task<ErrorOr<Unit>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
-        //TODO: add validation for existing product family
+        var productFamily = await _productFamilyRepository.GetByIdAsync(new ProductFamilyId(request.ProductFamilyId));
+        if (productFamily == null)
+        {
+            return Errors.ProductFamily.ProductFamilyDoesNotExists;
+        }
 
         var product = new Product(
             new ProductId(Guid.NewGuid()),

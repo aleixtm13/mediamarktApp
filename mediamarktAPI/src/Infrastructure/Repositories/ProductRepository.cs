@@ -12,5 +12,4 @@ public class ProductRepository : IProductRepository
     }
 
     public async Task Add(Product product) => await _context.Products.AddAsync(product);
-
 }
