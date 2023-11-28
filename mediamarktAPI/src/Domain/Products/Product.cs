@@ -5,16 +5,16 @@ namespace Domain.Products;
 public sealed class Product : AggregateRoot 
 {
 
-    public Product(ProductId productId, string name, string description, double price, ProductFamilyId productFamilyId)
+    public Product(ProductId id, string name, string description, double price, ProductFamilyId productFamilyId)
     {
-        ProductId = productId;
+        Id = id;
         Name = name;
         Description = description;
         Price = price;
         ProductFamilyId = productFamilyId;
     }
 
-    public ProductId ProductId {get; private set;}
+    public ProductId Id {get; private set;}
     public string Name {get; private set;} = string.Empty;
     public string Description {get; private set;} = string.Empty;
     public double Price {get; private set;}

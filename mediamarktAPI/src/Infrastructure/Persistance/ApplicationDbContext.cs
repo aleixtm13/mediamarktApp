@@ -2,6 +2,7 @@
 using Application.Data;
 using Domain.Planet;
 using Domain.Primitives;
+using Domain.Products;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext, IUnitOfWor
 {
     private readonly IPublisher _publisher;
     public DbSet<Planet> Planets { get; set; }
+    public DbSet<Product> Products { get; set; }
 
     public ApplicationDbContext(DbContextOptions options, IPublisher publisher) : base(options)
     {
@@ -19,7 +21,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext, IUnitOfWor
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);        
     }
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {
