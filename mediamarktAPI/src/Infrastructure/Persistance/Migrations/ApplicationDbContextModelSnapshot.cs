@@ -37,6 +37,46 @@ namespace Infrastructure.Persistance.Migrations
                     b.ToTable("Planets");
                 });
 
+            modelBuilder.Entity("Domain.Products.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<Guid>("ProductFamilyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductFamilyId");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Domain.Products.ProductFamily", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductFamily");
+                });
+
             modelBuilder.Entity("Domain.Planet.Planet", b =>
                 {
                     b.OwnsOne("Domain.ValueObjects.Orbit", "Orbit", b1 =>
@@ -69,6 +109,22 @@ namespace Infrastructure.Persistance.Migrations
 
                     b.Navigation("Orbit")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Products.Product", b =>
+                {
+                    b.HasOne("Domain.Products.ProductFamily", "ProductFamily")
+                        .WithMany("Products")
+                        .HasForeignKey("ProductFamilyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductFamily");
+                });
+
+            modelBuilder.Entity("Domain.Products.ProductFamily", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }
