@@ -8,7 +8,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom"
-import Root from './root.tsx'
+import Root from './components/Root/root.tsx'
 
 const router = createBrowserRouter([
   {
