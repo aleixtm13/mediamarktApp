@@ -7,11 +7,14 @@ import { Button } from 'primereact/button'
 import { InputText } from 'primereact/inputtext'
 import { useNavigate } from 'react-router'
 import { Dialog } from 'primereact/dialog'
-import { set } from 'immer/dist/internal.js'
 import ProductDetail from '../ProductDetail/ProductDetail'
+import { useProductsStore } from '../../store/productsStore'
 
 const Products: React.FC = () => {
-    const [products, setProducts] = useState<Product[]>([])
+  
+    const products = useProductsStore(state => state.products)
+    const setProducts = useProductsStore(state => state.setProducts)
+
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
     const [searchText, setSearchText] = useState<string>('')
     const [displayDetailsModal, setDisplayDetailsModal] = useState<boolean>(false)
