@@ -27,12 +27,16 @@ public sealed class CreateProductCommandHandler : IRequestHandler<CreateProductC
             return Errors.ProductFamily.ProductFamilyDoesNotExists;
         }
 
-        var product = new Product(
-            new ProductId(Guid.NewGuid()),
+        var product = Product.Create(new ProductId(Guid.NewGuid()),
             request.Name,
             request.Description,
             request.Price,
             new ProductFamilyId(request.ProductFamily));
+
+        if(product == null)
+        {
+            return Errors.Product.ProductPriceIsNegative;
+        }
         
         await _productRepository.Add(product);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
