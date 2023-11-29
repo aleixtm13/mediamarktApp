@@ -8,19 +8,29 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom"
-import Root from './components/Root/root.tsx'
+
+import { APIOptions, PrimeReactProvider } from 'primereact/api'
+import App from './components/App/App.tsx'
+
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: <App />,
   },
 ]);
+
+const value: APIOptions = {
+  cssTransition: false,
+  inputStyle: 'outlined'
+}
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <PrimeReactProvider value={value}>
+         <RouterProvider router={router} />
+      </PrimeReactProvider>
     </Provider>
-  </React.StrictMode>,
+  </React.StrictMode>
 )
