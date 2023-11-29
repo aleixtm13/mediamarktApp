@@ -83,7 +83,7 @@ const Products: React.FC = () => {
                         />
                         <Button
                             icon="pi pi-search"
-                            className="p-button-sm p-button-text p-ml-2"
+                            className="p-button-icon ml-2"
                             onClick={onGetProducts}
                         />
                     </div>
