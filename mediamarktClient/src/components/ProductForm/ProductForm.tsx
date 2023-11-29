@@ -27,20 +27,54 @@ const ProductForm: React.FC = () => {
         price: 0,
         productFamily: ''
     })
+    const [errors, setErrors] = useState({
+        name: '',
+        productFamily: '',
+        price: ''
+    });
     const handleInputChange = (e: { target: { value: any } }, fieldName: any) => {
         const value = e.target.value;
         setProduct({ ...product, [fieldName]: value });
     };
 
+    const validateForm = () => {
+        let isValid = true;
+        const { name, productFamily, price } = product;
+        const newErrors = { name: '', productFamily: '', price: '' };
+    
+        if (!name.trim()) {
+          newErrors.name = 'Name is required';
+          isValid = false;
+        }
+    
+        if (!productFamily) {
+          newErrors.productFamily = 'Product Family is required';
+          isValid = false;
+        }
+    
+        if (price < 0 || isNaN(price)) {
+          newErrors.price = 'Price must be a non-negative number';
+          isValid = false;
+        }
+    
+        setErrors(newErrors);
+        return isValid;
+      };
+
     const handleSubmit = async(e: any) => {
         e.preventDefault();
-        const createdProduct = await createProduct(product)
-        console.log(createdProduct)
-        setProduct(createdProduct)
+        if(validateForm()) {
+            const createdProduct = await createProduct(product)
+            console.log(createdProduct)
+            setProduct(createdProduct)
+        } else {
+            console.log('Form is not valid')
+        }
+       
     }
     return (
         <form onSubmit={handleSubmit}>
-             <div className="p-fluid">
+            <div className="p-fluid">
                 <div className="p-field">
                     <label htmlFor="name">Product Name</label>
                     <InputText 
@@ -49,6 +83,7 @@ const ProductForm: React.FC = () => {
                         value={product.name}
                         onChange={(e) => handleInputChange(e, 'name')}
                     />
+                    <small className="p-error">{errors.name}</small>
                 </div>
 
                 <div className="p-field">
@@ -69,6 +104,7 @@ const ProductForm: React.FC = () => {
                         mode="currency" 
                         currency="EUR"
                         />
+                    <small className="p-error">{errors.price}</small>
                 </div>
 
                 <div className="p-field">
@@ -82,11 +118,12 @@ const ProductForm: React.FC = () => {
                         onChange={(e) => handleInputChange(e, 'productFamily')}
                         placeholder="Select a product family"
                     />
+                    <small className="p-error">{errors.productFamily}</small>
                 </div>
                 <div className="p-field">
                     <Button label="Submit" type="submit" />
                 </div>
-             </div>
+            </div>
         </form>
     )
 }
