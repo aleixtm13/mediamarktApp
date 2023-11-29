@@ -1,11 +1,21 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import { createRoot } from 'react-dom/client'
 import './index.css'
 
-import Root from './components/Root/Root.tsx'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import HomePage from './Pages/HomePage/HomePage.tsx';
+import ProductPage from './Pages/Product/ProductPage.tsx';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-     <Root />
-  </React.StrictMode>
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+  },
+  {
+    path: "/product",
+    element: <ProductPage />,
+  }
+]);
+
+createRoot(document.getElementById('root')!).render(
+  <RouterProvider router={router} />
 )
