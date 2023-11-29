@@ -9,11 +9,15 @@ import { useNavigate } from 'react-router'
 import { Dialog } from 'primereact/dialog'
 import ProductDetail from '../ProductDetail/ProductDetail'
 import { useProductsStore } from '../../store/productsStore'
+import { Skeleton } from 'primereact/skeleton'
 
 const Products: React.FC = () => {
   
     const products = useProductsStore(state => state.products)
     const setProducts = useProductsStore(state => state.setProducts)
+
+    const isLoadingProducts = useProductsStore(state => state.isLoadingProducts)
+    const setLoadingProducts = useProductsStore(state => state.setProductsLoading)
 
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
     const [searchText, setSearchText] = useState<string>('')
@@ -42,13 +46,30 @@ const Products: React.FC = () => {
     }
     const modalFooter = (
         <div>
-          <Button label="Close" icon="pi pi-times" onClick={hideModal} className="p-button-text" />
+            <Button label="Close" icon="pi pi-times" onClick={hideModal} className="p-button-text" />
         </div>
-      );
+    );
 
+   
     useEffect(() => {
-        onGetProducts()
-    }, [])
+        setLoadingProducts(true)
+        setTimeout(() => {
+            onGetProducts()
+            setLoadingProducts(false)
+        }, 2000)
+    }, []) //TODO: simulate long query to show skeleton
+
+    const skeleton = (
+        <div>
+            <div className='flex-1 mb-2'>
+                <Skeleton width='100%'/>
+            </div>
+            <div className='flex-1'>
+                <Skeleton width='100%'/>
+            </div>
+        </div>
+        
+    );
     return (
         <div>
             <div className='container mx-auto'>
@@ -57,32 +78,33 @@ const Products: React.FC = () => {
                     <Button className='flex-1' icon="pi pi-search" rounded outlined aria-label='search' onClick={onGetProducts}/>
                     <Button className='flex-1' icon="pi pi-plus" rounded outlined aria-label='add' onClick={onCreateProdruct} tooltip='Add new product'/>
                 </div>
-                <DataTable value={products}  tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="name" header="Name"></Column>
-                    <Column
-                        body={
-                            (rowData: Product) => {
-                                return (
-                                    <Button
-                                        label="Details"
-                                        icon="pi pi-info-circle"
-                                        onClick={() => showModal(rowData)}
-                                    />
-                                )
-                            }
-                        }
-                    />
-                </DataTable>
 
-                <Dialog
-                    visible ={displayDetailsModal}
-                    onHide={hideModal}
-                    header="Product details"
-                    modal
-                    footer={modalFooter}
-                >
-                    <ProductDetail product={selectedProduct}/>
-                </Dialog>
+                {isLoadingProducts ? skeleton : 
+                    <>
+                        <DataTable value={products} tableStyle={{ minWidth: '50rem' }}>
+                            <Column field="name" header="Name"></Column>
+                            <Column
+                                body={(rowData: Product) => {
+                                    return (
+                                        <Button
+                                            label="Details"
+                                            icon="pi pi-info-circle"
+                                            onClick={() => showModal(rowData)} />
+                                    )
+                                } } />
+                        </DataTable>
+                        <Dialog
+                            visible={displayDetailsModal}
+                            onHide={hideModal}
+                            header="Product details"
+                            modal
+                            footer={modalFooter}
+                        >
+                            <ProductDetail product={selectedProduct} />
+                        </Dialog>
+                    </>
+                }
+            
             </div>
            
         </div>
