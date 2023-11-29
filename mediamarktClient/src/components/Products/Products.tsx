@@ -8,6 +8,7 @@ import { InputText } from 'primereact/inputtext'
 import { useNavigate } from 'react-router'
 import { Dialog } from 'primereact/dialog'
 import { set } from 'immer/dist/internal.js'
+import ProductDetail from '../ProductDetail/ProductDetail'
 
 const Products: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([])
@@ -78,12 +79,7 @@ const Products: React.FC = () => {
                     modal
                     footer={modalFooter}
                 >
-                     <div>
-                        <p>ID: {selectedProduct?.id}</p>
-                        <p>Name: {selectedProduct?.name}</p>
-                        <p>Product Family: {selectedProduct?.productFamily}</p>
-                        <p>Price: {selectedProduct?.price}</p>
-                    </div>
+                    <ProductDetail product={selectedProduct}/>
                 </Dialog>
             </div>
            
