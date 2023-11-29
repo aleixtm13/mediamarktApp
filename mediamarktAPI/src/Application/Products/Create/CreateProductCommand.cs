@@ -5,7 +5,7 @@ namespace Application.Products.Create;
 
 public record CreateProductCommand(
     string Name,
-    string Descritpion,
+    string Description,
     double Price,
-    Guid ProductFamilyId
+    Guid ProductFamily
 ) : IRequest<ErrorOr<Unit>>;

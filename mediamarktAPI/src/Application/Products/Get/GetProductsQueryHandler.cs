@@ -8,7 +8,6 @@ namespace Application.Products.Get
     public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, ErrorOr<IReadOnlyList<ProductResponse>>>
     {
         private readonly IProductRepository _productRepository;
-        private readonly IProductFamilyRepository _productFamilyRepository;
 
         public GetProductsQueryHandler(IProductRepository productRepository)
         {

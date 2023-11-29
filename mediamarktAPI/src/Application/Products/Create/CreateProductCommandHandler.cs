@@ -21,18 +21,22 @@ public sealed class CreateProductCommandHandler : IRequestHandler<CreateProductC
 
     public async Task<ErrorOr<Unit>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
-        var productFamily = await _productFamilyRepository.GetByIdAsync(new ProductFamilyId(request.ProductFamilyId));
+        var productFamily = await _productFamilyRepository.GetByIdAsync(new ProductFamilyId(request.ProductFamily));
         if (productFamily == null)
         {
             return Errors.ProductFamily.ProductFamilyDoesNotExists;
         }
 
-        var product = new Product(
-            new ProductId(Guid.NewGuid()),
+        var product = Product.Create(new ProductId(Guid.NewGuid()),
             request.Name,
-            request.Descritpion,
+            request.Description,
             request.Price,
-            new ProductFamilyId(request.ProductFamilyId));
+            new ProductFamilyId(request.ProductFamily));
+
+        if(product == null)
+        {
+            return Errors.Product.ProductPriceIsNegative;
+        }
         
         await _productRepository.Add(product);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
