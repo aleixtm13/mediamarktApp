@@ -5,11 +5,20 @@ interface ProductDetailProps {
 }
 const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
     return (
-        <div>
-            <p>Name: {product?.name}</p>
-            <p>Product Family: {product?.productFamily}</p>
-            <p>Price: {product?.price}</p>
-        </div>
+        <div className="p-4">
+            <div className="mb-4">
+                <p className="text-gray-600">Description:</p>
+                <p>{product?.description}</p>
+            </div>
+            <div className="mb-4">
+                <p className="text-gray-600">Product Family</p>
+                <p>{product?.productFamily}</p>
+            </div>
+            <div>
+                <p className="text-gray-600">Price:</p>
+                <p>{product?.price} €</p>
+            </div>
+      </div>
     )
 }
 

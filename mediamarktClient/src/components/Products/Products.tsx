@@ -113,7 +113,7 @@ const Products: React.FC = () => {
                         <Dialog
                             visible={displayDetailsModal}
                             onHide={hideModal}
-                            header="Product details"
+                            header={selectedProduct?.name}
                             modal
                             footer={modalFooter}
                         >
