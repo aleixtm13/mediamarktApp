@@ -1,6 +1,8 @@
 import { Product } from '../../Model/Product'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
+import { useEffect, useState } from 'react'
+import { getProducts } from '../../services/productService'
 
 const products: Product[] = [
     {
@@ -19,7 +21,20 @@ const products: Product[] = [
     },
 ]
 
-function Products() {
+const Products: React.FC = () => {
+    const [products, setProducts] = useState<Product[]>([])
+
+    useEffect(() => {
+        const onGetProducts = async () => {
+            try {
+                const products = await getProducts('')
+                setProducts(products)
+            } catch (error) {
+                console.error('Error fetching products')
+            }
+        }
+        onGetProducts()
+    })
     return (
         <div>
             <div className='container'>
