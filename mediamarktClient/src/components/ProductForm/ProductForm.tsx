@@ -4,6 +4,7 @@ import { useState } from "react"
 import { InputNumber } from "primereact/inputnumber"
 import { Dropdown } from "primereact/dropdown"
 import { Button } from "primereact/button"
+import { createProduct } from "../../services/productService"
 
 const familyProducts = [
     {
@@ -21,7 +22,6 @@ const familyProducts = [
 
 const ProductForm: React.FC = () => {
     const [product, setProduct] = useState<Product>({
-        id: '',
         name: '',
         description: '',
         price: 0,
@@ -32,12 +32,14 @@ const ProductForm: React.FC = () => {
         setProduct({ ...product, [fieldName]: value });
     };
 
-    const handleSubmitt = (e: any) => {
+    const handleSubmit = async(e: any) => {
         e.preventDefault();
-        console.log(product)
+        const createdProduct = await createProduct(product)
+        console.log(createdProduct)
+        setProduct(createdProduct)
     }
     return (
-        <form onSubmit={handleSubmitt}>
+        <form onSubmit={handleSubmit}>
              <div className="p-fluid">
                 <div className="p-field">
                     <label htmlFor="name">Product Name</label>
