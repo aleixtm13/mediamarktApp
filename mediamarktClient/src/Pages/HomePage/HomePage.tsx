@@ -1,7 +1,7 @@
-import Products from '../Products/Products'
-import './App.css'
+import Products from '../../components/Products/Products'
+import './HomePage.css'
 
-function App() {
+const HomePage: React.FC = () => {
 
   return (
     <>
@@ -13,4 +13,4 @@ function App() {
   )
 }
 
-export default App
+export default HomePage

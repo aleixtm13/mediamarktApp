@@ -1,5 +1,7 @@
 @import './styles/tailwind.css';
 @import 'primeicons/primeicons.css';
+@import "primereact/resources/themes/lara-light-cyan/theme.css";
+
 
 body {
     margin: 0;

@@ -10,14 +10,19 @@ import {
 } from "react-router-dom"
 
 import { APIOptions, PrimeReactProvider } from 'primereact/api'
-import App from './components/App/App.tsx'
 
+import ProductPage from './Pages/Product/ProductPage.tsx'
+import HomePage from './Pages/HomePage/HomePage.tsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <HomePage />,
   },
+  {
+    path: "/product",
+    element: <ProductPage />,
+  }
 ]);
 
 const value: APIOptions = {

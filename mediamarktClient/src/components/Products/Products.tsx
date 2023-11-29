@@ -6,23 +6,6 @@ import { getProducts } from '../../services/productService'
 import { Button } from 'primereact/button'
 import { InputText } from 'primereact/inputtext'
 
-const products: Product[] = [
-    {
-        id: "1",
-        name: "iPhone 12",
-        description: "Apple iPhone 12 64GB Zwart",
-        price: 909,
-        productFamily: "Smartphone"
-    },
-    {
-        id: "2",
-        name: "Delonghi Dedica",
-        description: "Delonghi Dedica EC685.BK",
-        price: 199.9,
-        productFamily: "coffee machine"
-    },
-]
-
 const Products: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([])
     const [searchText, setSearchText] = useState<string>('')
