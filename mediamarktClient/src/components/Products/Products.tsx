@@ -5,10 +5,12 @@ import { useEffect, useState } from 'react'
 import { getProducts } from '../../services/productService'
 import { Button } from 'primereact/button'
 import { InputText } from 'primereact/inputtext'
+import { useNavigate } from 'react-router'
 
 const Products: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([])
     const [searchText, setSearchText] = useState<string>('')
+    const navigate = useNavigate()
 
     const onGetProducts = async () => {
         try {
@@ -19,6 +21,10 @@ const Products: React.FC = () => {
         }
     }
 
+    const onCreateProdruct = async () => {
+        navigate('/product')
+    }
+
     useEffect(() => {
         onGetProducts()
     }, [])
@@ -27,7 +33,8 @@ const Products: React.FC = () => {
             <div className='container mx-auto'>
                 <div className='flex'>
                     <InputText className='flex-1' value={searchText} onChange={(e) => setSearchText(e.target.value)} placeholder='Filter products by name'/>
-                    <Button className='flex-1'  icon="pi pi-search" rounded outlined aria-label='search' onClick={onGetProducts}/>
+                    <Button className='flex-1' icon="pi pi-search" rounded outlined aria-label='search' onClick={onGetProducts}/>
+                    <Button className='flex-1' icon="pi pi-plus" rounded outlined aria-label='add' onClick={onCreateProdruct} tooltip='Add new product'/>
                 </div>
                 <DataTable value={products}  tableStyle={{ minWidth: '50rem' }}>
                     <Column field="name" header="Name"></Column>
