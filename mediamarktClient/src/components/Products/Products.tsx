@@ -56,7 +56,6 @@ const Products: React.FC = () => {
                 </div>
                 <DataTable value={products}  tableStyle={{ minWidth: '50rem' }}>
                     <Column field="name" header="Name"></Column>
-                    <Column field="productFamily" header="Product family"></Column>
                     <Column
                         body={
                             (rowData: Product) => {
