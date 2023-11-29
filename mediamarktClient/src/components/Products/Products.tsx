@@ -6,10 +6,14 @@ import { getProducts } from '../../services/productService'
 import { Button } from 'primereact/button'
 import { InputText } from 'primereact/inputtext'
 import { useNavigate } from 'react-router'
+import { Dialog } from 'primereact/dialog'
+import { set } from 'immer/dist/internal.js'
 
 const Products: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([])
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
     const [searchText, setSearchText] = useState<string>('')
+    const [displayDetailsModal, setDisplayDetailsModal] = useState<boolean>(false)
     const navigate = useNavigate()
 
     const onGetProducts = async () => {
@@ -25,6 +29,19 @@ const Products: React.FC = () => {
         navigate('/product')
     }
 
+    const showModal = (product: Product) => {
+        setSelectedProduct(product)
+        setDisplayDetailsModal(true)
+    }
+    const hideModal = () => {
+        setDisplayDetailsModal(false)
+    }
+    const modalFooter = (
+        <div>
+          <Button label="Close" icon="pi pi-times" onClick={hideModal} className="p-button-text" />
+        </div>
+      );
+
     useEffect(() => {
         onGetProducts()
     }, [])
@@ -39,7 +56,35 @@ const Products: React.FC = () => {
                 <DataTable value={products}  tableStyle={{ minWidth: '50rem' }}>
                     <Column field="name" header="Name"></Column>
                     <Column field="productFamily" header="Product family"></Column>
+                    <Column
+                        body={
+                            (rowData: Product) => {
+                                return (
+                                    <Button
+                                        label="Details"
+                                        icon="pi pi-info-circle"
+                                        onClick={() => showModal(rowData)}
+                                    />
+                                )
+                            }
+                        }
+                    />
                 </DataTable>
+
+                <Dialog
+                    visible ={displayDetailsModal}
+                    onHide={hideModal}
+                    header="Product details"
+                    modal
+                    footer={modalFooter}
+                >
+                     <div>
+                        <p>ID: {selectedProduct?.id}</p>
+                        <p>Name: {selectedProduct?.name}</p>
+                        <p>Product Family: {selectedProduct?.productFamily}</p>
+                        <p>Price: {selectedProduct?.price}</p>
+                    </div>
+                </Dialog>
             </div>
            
         </div>
