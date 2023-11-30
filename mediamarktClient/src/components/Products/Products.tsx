@@ -59,15 +59,12 @@ const Products: React.FC = () => {
 
     useEffect(() => {
         setLoadingProducts(true)
-        if(products.length > 0) setLoadingProducts(false)
-        else {    
-            setTimeout(() => {
-                onGetProducts()
-                setLoadingProducts(false)
-            }, 2000)
-        }
-    
-    }, []) //TODO: simulate long query to show skeleton
+        setTimeout(() => {
+            onGetProducts()
+            setLoadingProducts(false)
+        }, 2000) //TODO: simulate long query to show skeleton
+        
+    }, []) 
 
     const skeleton = (
         <div>
