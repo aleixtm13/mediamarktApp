@@ -1,29 +1,37 @@
 # MediaMarkt App
 ## Application Overview
-This application is composed of two main parts: a client application developed using React and TypeScript with Vite, and an API developed using .NET.
+This application is composed of two main parts: a client application developed using React and TypeScript using Vite as a build tool, and an API developed using .NET 6. Also there is a SQL Server Database to store and manage the products.
 
-The client application is responsible for the user interface and user interactions. It fetches data from the .NET API and displays it to the user. The user can interact with the data through the client application, which sends requests to the API based on the user's actions.
-
-The .NET API is responsible for handling these requests. It interacts with the database, performs necessary computations, and sends the results back to the client application.
+## Prerequisites
+* Node.js and npm installed for the client application
+* .NET 6.0 SDK installed for the API
+* SQL Server for the Database
 
 ## How to Start
-### Prerequisites
-Node.js and npm installed for the client application
-.NET SDK installed for the API
-### Starting the Client Application
-Navigate to the client application directory
-Install the dependencies with npm install
-Start the application with npm start
-The application will be available at http://localhost:3000
-### Starting the API
-Navigate to the API directory
-Restore the dependencies with dotnet restore
-Start the API with dotnet run
-The API will be available at http://localhost:5000
+### Create the database
+* The API is developed using EF Core in a Code-First way.
+* The DB will be created the first time you run the API.
+* Ensure the Database connection string in ```mediamarkt\mediamarktAPI\src\Web.API\appsettings.Development.json``` is that you want for your environment
+```json
+{
+  "ConnectionStrings": {
+    "Database": "Server=localhost; Database=Mediamarkt;Integrated Security=True;TrustServerCertificate=True;"
+  },
+  ...
+}
+```
+### Start the Client Application
+* Navigate to the client application directory
+* Install the dependencies with ```npm install```
+* Start the application with npm ```run dev```
+* The application will be available at http://localhost:5173
+### Start the API
+* Navigate to the API directory
+* Restore the dependencies with ```dotnet restore```
+* Start the API with ```dotnet run```
+ 
 Please ensure that both the client application and the API are running simultaneously for the application to function correctly.
 
-### Next Steps
-Explore the codebase to understand the application structure and logic
-Make necessary modifications to suit your requirements
-Build and deploy the application
-Remember to follow good software development practices, including writing unit tests, using version control, and regularly updating dependencies.
+### Consuming the API
+There is a swagger view to consume and test the API.
+It is available at: https://localhost:7232/swagger/index.html
