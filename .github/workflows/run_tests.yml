@@ -17,3 +17,22 @@ jobs:
               run: npm install
             - name: Run unit tests
               run: npm run test
+    
+    api-unit-tests:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+              shell: bash
+              working-directory: ./mediamarktAPI
+        steps:
+            - uses: actions/checkout@v4
+            - name: Setup dotnet
+              uses: actions/setup-dotnet@v3
+              with:
+                dotnet-version: '6.x'
+            - name: Install dependencies
+              run: dotnet restore
+            - name: Build
+              run: dotnet build
+            - name: Test with the dotnet CLI
+              run: dotnet test
