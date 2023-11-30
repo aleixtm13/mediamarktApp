@@ -1,4 +1,4 @@
-import { Product } from "../../Model/Product";
+import { Product } from "../../model/Product";
 
 interface ProductDetailProps {
     product: Product | null;

@@ -1,4 +1,4 @@
-import { Product } from "../Model/Product"
+import { Product } from "../model/Product"
 
 export const getProducts = async (searchText: string) => {
     try  {

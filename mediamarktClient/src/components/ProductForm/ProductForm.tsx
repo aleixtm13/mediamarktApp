@@ -1,5 +1,5 @@
 import { InputText } from "primereact/inputtext"
-import { Product } from "../../Model/Product"
+import { Product } from "../../model/Product"
 import { useRef, useState } from "react"
 import { InputNumber } from "primereact/inputnumber"
 import { Dropdown } from "primereact/dropdown"

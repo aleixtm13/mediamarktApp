@@ -1,4 +1,4 @@
-import { Product } from '../../Model/Product'
+import { Product } from '../../model/Product'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import { useEffect, useState } from 'react'
