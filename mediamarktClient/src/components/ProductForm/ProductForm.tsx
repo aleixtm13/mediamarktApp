@@ -77,21 +77,22 @@ const ProductForm: React.FC = () => {
         <form onSubmit={handleSubmit}>
             <div className="p-fluid pl-28 pr-28 pt-5">
                 <div className="p-field mb-4">
-                    <label className="block text-sm text-gray-600 mb-1" htmlFor="name">Product Name</label>
+                    <label className="block text-sm text-gray-600 mb-1" htmlFor="name">Product Name*</label>
                     <InputText 
                         id="name"
                         placeholder="Introduce the product name"
                         value={product.name}
                         onChange={(e) => handleInputChange(e, 'name')}
                         className="p-inputtext-sm w-full"
+                        required
                     />
-                    <small className="p-error">{errors.name}</small>
+                    <small id="nameError" className="p-error">{errors.name}</small>
                 </div>
 
                 <div className="p-field mb-4">
                     <label className="block text-sm text-gray-600 mb-1" htmlFor="description">Description</label>
                     <InputTextarea 
-                        id="name"
+                        id="description"
                         placeholder="Introduce the product description"
                         value={product.description}
                         onChange={(e) => handleInputChange(e, 'description')}
@@ -101,7 +102,7 @@ const ProductForm: React.FC = () => {
                 <div className="p-field mb-4">
                     <label className="block text-sm text-gray-600 mb-1" htmlFor="price">Price</label>
                     <InputNumber 
-                        inputId="currency" 
+                        id="price" 
                         value={product.price} 
                         onValueChange={(e) => handleInputChange(e, 'price')} 
                         mode="currency" 

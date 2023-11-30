@@ -40,6 +40,15 @@ It is available at: https://localhost:7232/swagger/index.html
 
 ### Tests
 This application has Unit Tests for both Client Application and for the API
-To run the API Unit Tests:
-* go to  ```mediamarkt\mediamarktAPI\``` folder using a terminal
+#### API Unit Tests:
+To run the API Unit tests:
+* Open a terminal
+* go to  ```mediamarkt\mediamarktAPI\``` folder
 * execute ```dotnet test``` command
+
+#### Client Unit Tests:
+To run the Client Unit tests:
+* Open a terminal
+* go to  ```mediamarkt\mediamarktClient\``` folder
+* execute ```npm run test``` command
+
