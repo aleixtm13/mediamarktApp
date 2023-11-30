@@ -37,3 +37,9 @@ It is available at: https://localhost:7232/swagger/index.html
 * Install the dependencies with ```npm install```
 * Start the application with npm ```run dev```
 * The application will be available at http://localhost:5173
+
+### Tests
+This application has Unit Tests for both Client Application and for the API
+To run the API Unit Tests:
+* go to  ```mediamarkt\mediamarktAPI\``` folder using a terminal
+* execute ```dotnet test``` command
