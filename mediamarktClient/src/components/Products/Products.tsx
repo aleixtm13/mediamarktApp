@@ -26,6 +26,7 @@ const Products: React.FC = () => {
 
     const onClearFilter = () => {
         setSearchText('')
+        onGetProducts()
     }
 
     const onGetProducts = async () => {
@@ -90,21 +91,17 @@ const Products: React.FC = () => {
                             placeholder="Search by name..."
                             className="p-inputtext-sm focus:outline-none"
                         />
-                        {
-                            searchText && (
-                                <Button 
-                                className='flex items-center ml-2'
-                                icon="pi pi-times"
-                                severity='secondary'
-                                tooltip='Clear filter'
-                                tooltipOptions={{ position: 'bottom', mouseTrack: true }}
-                                onClick={onClearFilter}
-                                rounded
-                                raised
-                                >
-                                </Button>
-                            )
-                        }
+                        <Button 
+                            className='flex items-center ml-2'
+                            icon="pi pi-filter-slash"
+                            severity='secondary'
+                            tooltip='Clear filter'
+                            tooltipOptions={{ position: 'bottom', mouseTrack: true }}
+                            onClick={onClearFilter}
+                            rounded
+                            raised
+                        />
+                            
                         <Button
                             icon="pi pi-search"
                             className="p-button-icon ml-2"
@@ -129,6 +126,7 @@ const Products: React.FC = () => {
                         <DataTable value={products} tableStyle={{ minWidth: '50rem' }}>
                             <Column field="name"></Column>
                             <Column
+                                className='flex justify-center'
                                 body={(rowData: Product) => {
                                     return (
                                         <Button
