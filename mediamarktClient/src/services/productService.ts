@@ -29,9 +29,8 @@ export const createProduct = async(product: Product) => {
         if(!response.ok) {
             throw new Error('Failed to create product')
         }
-        const createdProduct = await response.json()
-        return createdProduct
+        return true
     } catch (error) {
-        throw new Error('Failed to create product')
+       return false
     }
 }

@@ -1,11 +1,12 @@
 import { InputText } from "primereact/inputtext"
 import { Product } from "../../Model/Product"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { InputNumber } from "primereact/inputnumber"
 import { Dropdown } from "primereact/dropdown"
 import { Button } from "primereact/button"
 import { createProduct } from "../../services/productService"
 import { InputTextarea } from "primereact/inputtextarea"
+import { Toast } from "primereact/toast"
 
 const familyProducts = [
     {
@@ -33,6 +34,20 @@ const ProductForm: React.FC = () => {
         productFamily: '',
         price: ''
     });
+    
+    const createdProductToast = useRef(null);
+    const showCreatedProductToast = () => {
+        if (createdProductToast.current) {
+            createdProductToast.current.show({severity:'success', summary: 'Product Created', detail:'Product has been created successfully'});
+        }
+    }
+    const failedToCreateProductToast = useRef(null);
+    const showFailedToCreateProductToast = () => {
+        if (failedToCreateProductToast.current) {
+            failedToCreateProductToast.current.show({severity:'Error', summary: 'Product cannot be created', detail:'Product cannot be created due to an internal server error', position: 'center'});
+        }
+    }
+
     const handleInputChange = (e: { target: { value: any } }, fieldName: any) => {
         const value = e.target.value;
         setProduct({ ...product, [fieldName]: value });
@@ -65,9 +80,13 @@ const ProductForm: React.FC = () => {
     const handleSubmit = async(e: any) => {
         e.preventDefault();
         if(validateForm()) {
-            const createdProduct = await createProduct(product)
-            console.log(createdProduct)
-            setProduct(createdProduct)
+            if(await createProduct(product)){
+                setProduct(product)
+                showCreatedProductToast()
+            } else {
+                showFailedToCreateProductToast()
+            }
+           
         } else {
             console.log('Form is not valid')
         }
@@ -128,6 +147,8 @@ const ProductForm: React.FC = () => {
                 </div>
                 
                 <div className="flex justify-center">
+                    <Toast ref={createdProductToast} position="center"/>
+                    <Toast ref={failedToCreateProductToast} position="center"/>
                     <Button label="Create product" type="submit" className="p-button" style={{ width: 'fit-content' }}/>
                 </div>
 
