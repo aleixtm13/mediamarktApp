@@ -9,9 +9,9 @@ const Header: React.FC = () => {
     <div className="text-white" style={{backgroundColor: 'var(--primary-color)'}}>
         <div className="container mx-auto py-4 flex justify-center">
             <Button
-            id="logo-button"
-            data-testid="logo-button"
-            onClick={onAppLogoClick}
+                id="logo-button"
+                data-testid="logo-button"
+                onClick={onAppLogoClick}
             >
                 <h1 className="text-2xl font-semibold">MediaMarkt</h1>
             </Button>

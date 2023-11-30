@@ -77,10 +77,11 @@ const ProductForm: React.FC = () => {
         return isValid;
       };
 
-    const handleSubmit = async(e: any) => {
-        e.preventDefault();
+    const handleSubmit = async(e: Event) => {
+        e.preventDefault()
+
         if(validateForm()) {
-            if(await createProduct(product)){
+            if (await createProduct(product)) {
                 setProduct(product)
                 showCreatedProductToast()
             } else {
