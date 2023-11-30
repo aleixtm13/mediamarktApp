@@ -1,15 +1,17 @@
 name: Test and Build code
 
 on:
-  pull_request:
-    branches: [ develop ]
+  push:
+    branches: [ test-branch ]
 
 jobs:
     client-unit-tests:
         runs-on: ubuntu-latest
+        defaults:
+            run:
+              shell: bash
+              working-directory: ./mediamarktClient
         steps:
-            - run: ls
-            - run: cd mediamarktClient
             - uses: actions/checkout@v2
             - name: Install dependencies
               run: npm install
