@@ -1,8 +1,8 @@
 name: Test and Build code
 
 on:
-  push:
-    branches: [ test-branch ]
+  pull_request:
+    branches: [ develop ]
 
 jobs:
     client-unit-tests:
