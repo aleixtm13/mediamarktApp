@@ -1,8 +1,7 @@
-import { describe, test, expect, vi } from 'vitest'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { describe, test, expect } from 'vitest'
+import { fireEvent, render } from '@testing-library/react'
 import ProductForm from '../../components/ProductForm/ProductForm'
 import { BrowserRouter } from 'react-router-dom'
-import userEvent from '@testing-library/user-event'
 
 describe('<ProductForm />', () => {
     test('ProductForm mounts correctly', () => {
