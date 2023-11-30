@@ -1,16 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import { createRoot } from 'react-dom/client'
 import './index.css'
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom"
-
-import { APIOptions, PrimeReactProvider } from 'primereact/api'
-
-import ProductPage from './Pages/Product/ProductPage.tsx'
-import HomePage from './Pages/HomePage/HomePage.tsx'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import HomePage from './Pages/HomePage/HomePage.tsx';
+import ProductPage from './Pages/Product/ProductPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -23,15 +16,6 @@ const router = createBrowserRouter([
   }
 ]);
 
-const value: APIOptions = {
-  cssTransition: false,
-  inputStyle: 'outlined'
-}
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-      <PrimeReactProvider value={value}>
-         <RouterProvider router={router} />
-      </PrimeReactProvider>
-  </React.StrictMode>
+createRoot(document.getElementById('root')!).render(
+  <RouterProvider router={router} />
 )

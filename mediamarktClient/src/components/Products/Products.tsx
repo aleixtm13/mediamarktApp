@@ -53,10 +53,14 @@ const Products: React.FC = () => {
    
     useEffect(() => {
         setLoadingProducts(true)
-        setTimeout(() => {
-            onGetProducts()
-            setLoadingProducts(false)
-        }, 2000)
+        if(products.length > 0) setLoadingProducts(false)
+        else {    
+            setTimeout(() => {
+                onGetProducts()
+                setLoadingProducts(false)
+            }, 2000)
+        }
+    
     }, []) //TODO: simulate long query to show skeleton
 
     const skeleton = (
@@ -71,18 +75,35 @@ const Products: React.FC = () => {
         
     );
     return (
-        <div>
+        <div className='p-3'>
             <div className='container mx-auto'>
-                <div className='flex'>
-                    <InputText className='flex-1' value={searchText} onChange={(e) => setSearchText(e.target.value)} placeholder='Filter products by name'/>
-                    <Button className='flex-1' icon="pi pi-search" rounded outlined aria-label='search' onClick={onGetProducts}/>
-                    <Button className='flex-1' icon="pi pi-plus" rounded outlined aria-label='add' onClick={onCreateProdruct} tooltip='Add new product'/>
+                <div className="p-2 flex items-center justify-between">
+                    <div className="flex justify-left">
+                        <InputText
+                            value={searchText}
+                            onChange={(e) => setSearchText(e.target.value)}
+                            placeholder="Search by name..."
+                            className="p-inputtext-sm focus:outline-none"
+                        />
+                        <Button
+                            icon="pi pi-search"
+                            className="p-button-icon ml-2"
+                            onClick={onGetProducts}
+                        />
+                    </div>
+                    <Button
+                        icon="pi pi-plus"
+                        className="p-button-icon"
+                        tooltip='Create new product'
+                        tooltipOptions={{ position: 'bottom', mouseTrack: true }}
+                        onClick={onCreateProdruct}
+                    />
                 </div>
 
                 {isLoadingProducts ? skeleton : 
                     <>
                         <DataTable value={products} tableStyle={{ minWidth: '50rem' }}>
-                            <Column field="name" header="Name"></Column>
+                            <Column field="name"></Column>
                             <Column
                                 body={(rowData: Product) => {
                                     return (
@@ -96,7 +117,7 @@ const Products: React.FC = () => {
                         <Dialog
                             visible={displayDetailsModal}
                             onHide={hideModal}
-                            header="Product details"
+                            header={selectedProduct?.name}
                             modal
                             footer={modalFooter}
                         >

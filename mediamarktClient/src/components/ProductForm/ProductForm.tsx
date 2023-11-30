@@ -5,6 +5,7 @@ import { InputNumber } from "primereact/inputnumber"
 import { Dropdown } from "primereact/dropdown"
 import { Button } from "primereact/button"
 import { createProduct } from "../../services/productService"
+import { InputTextarea } from "primereact/inputtextarea"
 
 const familyProducts = [
     {
@@ -74,41 +75,44 @@ const ProductForm: React.FC = () => {
     }
     return (
         <form onSubmit={handleSubmit}>
-            <div className="p-fluid">
-                <div className="p-field">
-                    <label htmlFor="name">Product Name</label>
+            <div className="p-fluid pl-28 pr-28 pt-5">
+                <div className="p-field mb-4">
+                    <label className="block text-sm text-gray-600 mb-1" htmlFor="name">Product Name</label>
                     <InputText 
                         id="name"
                         placeholder="Introduce the product name"
                         value={product.name}
                         onChange={(e) => handleInputChange(e, 'name')}
+                        className="p-inputtext-sm w-full"
                     />
                     <small className="p-error">{errors.name}</small>
                 </div>
 
-                <div className="p-field">
-                    <label htmlFor="description">Description</label>
-                    <InputText 
+                <div className="p-field mb-4">
+                    <label className="block text-sm text-gray-600 mb-1" htmlFor="description">Description</label>
+                    <InputTextarea 
                         id="name"
                         placeholder="Introduce the product description"
                         value={product.description}
                         onChange={(e) => handleInputChange(e, 'description')}
+                        className="p-inputtext-sm w-full"
                     />
                 </div>
-                <div className="p-field">
-                    <label htmlFor="price">Price</label>
+                <div className="p-field mb-4">
+                    <label className="block text-sm text-gray-600 mb-1" htmlFor="price">Price</label>
                     <InputNumber 
                         inputId="currency" 
                         value={product.price} 
                         onValueChange={(e) => handleInputChange(e, 'price')} 
                         mode="currency" 
                         currency="EUR"
+                        className="p-inputtext-sm w-full"
                         />
                     <small className="p-error">{errors.price}</small>
                 </div>
 
-                <div className="p-field">
-                    <label htmlFor="productFamily">Product Family</label>
+                <div className="p-field mb-4">
+                    <label className="block text-sm text-gray-600 mb-1" htmlFor="productFamily">Product Family</label>
                     <Dropdown 
                         id="productFamily"
                         value={product.productFamily}
@@ -117,12 +121,15 @@ const ProductForm: React.FC = () => {
                         optionValue="id"
                         onChange={(e) => handleInputChange(e, 'productFamily')}
                         placeholder="Select a product family"
+                        className="w-full"
                     />
                     <small className="p-error">{errors.productFamily}</small>
                 </div>
-                <div className="p-field">
-                    <Button label="Submit" type="submit" />
+                
+                <div className="flex justify-center">
+                    <Button label="Create product" type="submit" className="p-button" style={{ width: 'fit-content' }}/>
                 </div>
+
             </div>
         </form>
     )
