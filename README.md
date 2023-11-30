@@ -20,11 +20,7 @@ This application is composed of two main parts: a client application developed u
   ...
 }
 ```
-### Start the Client Application
-* Navigate to the client application directory
-* Install the dependencies with ```npm install```
-* Start the application with npm ```run dev```
-* The application will be available at http://localhost:5173
+
 ### Start the API
 * Navigate to the API directory
 * Restore the dependencies with ```dotnet restore```
@@ -35,3 +31,9 @@ Please ensure that both the client application and the API are running simultane
 ### Consuming the API
 There is a swagger view to consume and test the API.
 It is available at: https://localhost:7232/swagger/index.html
+
+### Start the Client Application
+* Navigate to the client application directory
+* Install the dependencies with ```npm install```
+* Start the application with npm ```run dev```
+* The application will be available at http://localhost:5173
