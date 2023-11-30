@@ -12,7 +12,7 @@ import { useProductsStore } from '../../store/productsStore'
 import { Skeleton } from 'primereact/skeleton'
 
 const Products: React.FC = () => {
-  
+
     const products = useProductsStore(state => state.products)
     const setProducts = useProductsStore(state => state.setProducts)
 
@@ -23,6 +23,10 @@ const Products: React.FC = () => {
     const [searchText, setSearchText] = useState<string>('')
     const [displayDetailsModal, setDisplayDetailsModal] = useState<boolean>(false)
     const navigate = useNavigate()
+
+    const onClearFilter = () => {
+        setSearchText('')
+    }
 
     const onGetProducts = async () => {
         try {
@@ -41,16 +45,17 @@ const Products: React.FC = () => {
         setSelectedProduct(product)
         setDisplayDetailsModal(true)
     }
+
     const hideModal = () => {
         setDisplayDetailsModal(false)
     }
+
     const modalFooter = (
         <div>
             <Button label="Close" icon="pi pi-times" onClick={hideModal} className="p-button-text" />
         </div>
     );
 
-   
     useEffect(() => {
         setLoadingProducts(true)
         if(products.length > 0) setLoadingProducts(false)
@@ -85,9 +90,26 @@ const Products: React.FC = () => {
                             placeholder="Search by name..."
                             className="p-inputtext-sm focus:outline-none"
                         />
+                        {
+                            searchText && (
+                                <Button 
+                                className='flex items-center ml-2'
+                                icon="pi pi-times"
+                                severity='secondary'
+                                tooltip='Clear filter'
+                                tooltipOptions={{ position: 'bottom', mouseTrack: true }}
+                                onClick={onClearFilter}
+                                rounded
+                                raised
+                                >
+                                </Button>
+                            )
+                        }
                         <Button
                             icon="pi pi-search"
                             className="p-button-icon ml-2"
+                            rounded
+                            raised
                             onClick={onGetProducts}
                         />
                     </div>
@@ -96,6 +118,8 @@ const Products: React.FC = () => {
                         className="p-button-icon"
                         tooltip='Create new product'
                         tooltipOptions={{ position: 'bottom', mouseTrack: true }}
+                        rounded
+                        raised
                         onClick={onCreateProdruct}
                     />
                 </div>
@@ -110,6 +134,7 @@ const Products: React.FC = () => {
                                         <Button
                                             label="Details"
                                             icon="pi pi-info-circle"
+                                            rounded
                                             onClick={() => showModal(rowData)} />
                                     )
                                 } } />

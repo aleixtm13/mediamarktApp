@@ -149,7 +149,13 @@ const ProductForm: React.FC = () => {
                 <div className="flex justify-center">
                     <Toast ref={createdProductToast} position="center"/>
                     <Toast ref={failedToCreateProductToast} position="center"/>
-                    <Button label="Create product" type="submit" className="p-button" style={{ width: 'fit-content' }}/>
+                    <Button 
+                    label="Create product" 
+                    type="submit" 
+                    className="p-button" style={{ width: 'fit-content' }}
+                    rounded
+                    raised
+                    />
                 </div>
 
             </div>
