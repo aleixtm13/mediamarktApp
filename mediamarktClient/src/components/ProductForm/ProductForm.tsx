@@ -48,7 +48,7 @@ const ProductForm: React.FC = () => {
         }
     }
 
-    const handleInputChange = (e: { target: { value: any } }, fieldName: any) => {
+    const handleInputChange = (e: { target: { value: object } }, fieldName: string) => {
         const value = e.target.value;
         setProduct({ ...product, [fieldName]: value });
     };
