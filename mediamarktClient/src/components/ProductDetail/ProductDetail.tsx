@@ -11,7 +11,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                 <p>{product?.description}</p>
             </div>
             <div className="mb-4">
-                <p className="text-gray-600">Product Family</p>
+                <p className="text-gray-600">Product Family:</p>
                 <p>{product?.productFamily}</p>
             </div>
             <div>
