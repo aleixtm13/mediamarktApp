@@ -24,8 +24,8 @@ public class CreateProductCommandHandlerUnitTests
     public async void HandleCreateProductCommandHandler_WhenProductFamilyDoesNotExists()
     {
         // Arrange
-        
-        var command = new CreateProductCommand("Product", "ProductDescription", 10, Guid.NewGuid());
+
+        CreateProductCommand command = new("Product", "ProductDescription", 10, Guid.NewGuid());
         // Act
         var result = await _handler.Handle(command, default);
         // Assert

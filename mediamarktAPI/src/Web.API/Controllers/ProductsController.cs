@@ -34,5 +34,4 @@ public class ProductsController : APIController
             errors => Problem(errors)
             );
     }
-    
 }
